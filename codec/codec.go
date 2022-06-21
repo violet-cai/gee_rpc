@@ -10,7 +10,7 @@ type Header struct {
 
 type Codec interface {
 	io.Closer
-	ReadHead(*Header) error
+	ReadHeader(*Header) error
 	ReadBody(interface{}) error
 	Write(*Header, interface{}) error
 }
@@ -26,7 +26,7 @@ const (
 
 var NewCodecFuncMap map[Type]NewCodecFunc
 
-func int() {
+func init() {
 	NewCodecFuncMap = make(map[Type]NewCodecFunc)
 	NewCodecFuncMap[GobType] = NewGobCodec
 }
